@@ -1,21 +1,18 @@
 import styled from "styled-components";
 
 export const MainContainer = styled.div`
-  height: 750px;
+  height: fit-content;
   max-width: 1000px;
+  max-height: 100%;
 
   width: 90%;
   box-sizing: border-box;
 
-  box-shadow: -4px 10px 10px 0px rgba(0, 0, 0, 0.2);
-
-  background: rgba(255, 255, 255, 0.3);
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   color: white;
 
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 50px;
 
   padding: 15px;
 
@@ -50,12 +47,16 @@ export const Header = styled.h2`
   font-size: 4.5rem;
   color: white;
 
-  @media all and (max-width: 900px) {
+  @media all and (max-width: 1000px) {
     font-size: 3rem;
   }
 
-  @media all and (max-width: 650px) {
-    font-size: 1.75rem;
+  @media all and (max-width: 800px) {
+    font-size: 2rem;
+  }
+
+  @media all and (max-width: 550px) {
+    font-size: 1.5rem;
   }
 `;
 
@@ -80,8 +81,8 @@ export const FormRow = styled.div`
 
   display: flex;
   justify-content: start;
-  align-items: center;
-  
+  align-items: start;
+
   gap: 1rem;
 
   @media all and (max-width: 750px) {

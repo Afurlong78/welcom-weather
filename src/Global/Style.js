@@ -16,7 +16,6 @@ export const Row = styled.div`
 
     margin-top: -15px;
     margin-bottom: 15px;
-
   }
 `;
 

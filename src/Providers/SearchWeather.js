@@ -9,11 +9,34 @@ export const useSearchWeatherContext = () => {
 
 export function SearchWeatherProvider({ children }) {
   //forecast state/days
-  const [dayOne, setDayOne] = useState([]);
-  const [dayTwo, setDayTwo] = useState([]);
-  const [dayThree, setDayThree] = useState([]);
-  const [dayFour, setDayFour] = useState([]);
-  const [dayFive, setDayFive] = useState([]);
+  const [forecastDescriptions, setForecastDescriptions] = useState({
+    dayOne: "",
+    dayTwo: "",
+    dayThree: "",
+    dayFour: "",
+    dayFive: "",
+  });
+
+  const [weatherTemps, setWeatherTemps] = useState({
+    dayOneStart: "",
+    dayOneEnd: "",
+    dayTwoStart: "",
+    dayTwoEnd: "",
+    dayThreeStart: "",
+    dayThreeEnd: "",
+    dayFourStart: "",
+    dayFourEnd: "",
+    dayFiveStart: "",
+    dayFiveEnd: "",
+  });
+
+  const [weatherDates, setWeatherDates] = useState({
+    dayOne: "",
+    dayTwo: "",
+    dayThree: "",
+    dayFour: "",
+    dayFive: "",
+  });
 
   //search and weather object
   const [searchInput, setSearchInput] = useState("");
@@ -86,18 +109,65 @@ export function SearchWeatherProvider({ children }) {
     }
   }, []);
 
-  useMemo(() => {
+  useEffect(() => {
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${weather.lat}&lon=${weather.lon}&appid=deb80c0a52040db9e3854194cfb3155e`
       )
       .then((response) => {
         console.log(response);
-        setDayOne(response.data.list.slice(0, 8));
-        setDayTwo(response.data.list.slice(8, 16));
-        setDayThree(response.data.list.slice(16, 24));
-        setDayFour(response.data.list.slice(24, 32));
-        setDayFive(response.data.list.slice(32, 40));
+
+        setForecastDescriptions({
+          ...forecastDescriptions,
+          dayOne: response.data.list[1].weather[0].description,
+          dayTwo: response.data.list[9].weather[0].description,
+          dayThree: response.data.list[17].weather[0].description,
+          dayFour: response.data.list[25].weather[0].description,
+          dayFive: response.data.list[33].weather[0].description,
+        });
+
+        setWeatherDates({
+          ...weatherDates,
+          dayOne: response.data.list[1].dt_txt.slice(0, 10),
+          dayTwo: response.data.list[9].dt_txt.slice(0, 10),
+          dayThree: response.data.list[17].dt_txt.slice(0, 10),
+          dayFour: response.data.list[25].dt_txt.slice(0, 10),
+          dayFive: response.data.list[33].dt_txt.slice(0, 10),
+        });
+
+        setWeatherTemps({
+          ...weatherTemps,
+          dayOneStart: Math.floor(
+            ((response.data.list[1].main.temp - 273.15) * 9) / 5 + 32
+          ),
+          dayOneEnd: Math.floor(
+            ((response.data.list[8].main.temp - 273.15) * 9) / 5 + 32
+          ),
+          dayTwoStart: Math.floor(
+            ((response.data.list[9].main.temp - 273.15) * 9) / 5 + 32
+          ),
+          dayTwoEnd: Math.floor(
+            ((response.data.list[16].main.temp - 273.15) * 9) / 5 + 32
+          ),
+          dayThreeStart: Math.floor(
+            ((response.data.list[17].main.temp - 273.15) * 9) / 5 + 32
+          ),
+          dayThreeEnd: Math.floor(
+            ((response.data.list[24].main.temp - 273.15) * 9) / 5 + 32
+          ),
+          dayFourStart: Math.floor(
+            ((response.data.list[25].main.temp - 273.15) * 9) / 5 + 32
+          ),
+          dayFourEnd: Math.floor(
+            ((response.data.list[32].main.temp - 273.15) * 9) / 5 + 32
+          ),
+          dayFiveStart: Math.floor(
+            ((response.data.list[33].main.temp - 273.15) * 9) / 5 + 32
+          ),
+          dayFiveEnd: Math.floor(
+            ((response.data.list[39].main.temp - 273.15) * 9) / 5 + 32
+          ),
+        });
       })
       .catch((err) => console.log(err));
   }, [weather]);
@@ -138,7 +208,11 @@ export function SearchWeatherProvider({ children }) {
   function locationHandler(e) {
     e.preventDefault();
 
-    localStorage.setItem("custom-weather-location", searchInput);
+    if (searchInput.length <= 0) {
+      alert("You must enter a location.");
+    } else {
+      localStorage.setItem("custom-weather-location", searchInput);
+    }
     setSearchInput("");
   }
 
@@ -149,12 +223,10 @@ export function SearchWeatherProvider({ children }) {
     weatherDescription,
     weather,
     locationHandler,
-    dayOne,
-    dayTwo,
-    dayThree,
-    dayFour,
-    dayFive,
     error,
+    forecastDescriptions,
+    weatherTemps,
+    weatherDates,
   };
 
   return (
