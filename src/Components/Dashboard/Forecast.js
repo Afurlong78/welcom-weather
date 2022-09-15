@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSearchWeatherContext } from "../../Providers/SearchWeather";
+import { useForecastContext } from "../../Providers/Forecast";
 import { TbTemperatureFahrenheit } from "react-icons/tb";
 import { BsArrowReturnLeft } from "react-icons/bs";
 import {
@@ -15,11 +16,14 @@ import {
 
 function Forecast() {
   const { forecastDescriptions, weatherTemps, weatherDates } =
-    useSearchWeatherContext();
+    useForecastContext();
 
   return (
     <ForecastWrapper>
-      <ForecastHeader>Your 5 day forecast <BsArrowReturnLeft style={{transform:"rotate(-90deg)"}}/></ForecastHeader>
+      <ForecastHeader>
+        Your 5 day forecast{" "}
+        <BsArrowReturnLeft style={{ transform: "rotate(-90deg)" }} />
+      </ForecastHeader>
       <ForecastContainer>
         <DayForecast>
           <DayForecastDate>{weatherDates.dayOne}</DayForecastDate>
@@ -28,7 +32,7 @@ function Forecast() {
               Title: <strong>Morning</strong>
             </ForecastItem>
             <ForecastItem>
-              Desc: <strong>{forecastDescriptions.dayOne}</strong>
+              Desc: <strong>{forecastDescriptions.dayOneStart}</strong>
             </ForecastItem>
             <ForecastItem>
               Temp: <strong>{weatherTemps.dayOneStart}</strong>
@@ -41,7 +45,7 @@ function Forecast() {
               Title: <strong>Afternoon</strong>
             </ForecastItem>
             <ForecastItem>
-              Desc: <strong>{forecastDescriptions.dayOne}</strong>
+              Desc: <strong>{forecastDescriptions.dayOneEnd}</strong>
             </ForecastItem>
             <ForecastItem>
               Temp: <strong>{weatherTemps.dayOneEnd}</strong>
@@ -56,7 +60,7 @@ function Forecast() {
               Title: <strong>Morning</strong>
             </ForecastItem>
             <ForecastItem>
-              Desc: <strong>{forecastDescriptions.dayTwo}</strong>
+              Desc: <strong>{forecastDescriptions.dayTwoStart}</strong>
             </ForecastItem>
             <ForecastItem>
               Temp: <strong>{weatherTemps.dayTwoStart}</strong>
@@ -69,7 +73,7 @@ function Forecast() {
               Title: <strong>Afternoon</strong>
             </ForecastItem>
             <ForecastItem>
-              Desc: <strong>{forecastDescriptions.dayTwo}</strong>
+              Desc: <strong>{forecastDescriptions.dayTwoEnd}</strong>
             </ForecastItem>
             <ForecastItem>
               Temp: <strong>{weatherTemps.dayTwoEnd}</strong>
@@ -84,7 +88,7 @@ function Forecast() {
               Title: <strong>Morning</strong>
             </ForecastItem>
             <ForecastItem>
-              Desc: <strong>{forecastDescriptions.dayThree}</strong>
+              Desc: <strong>{forecastDescriptions.dayThreeStart}</strong>
             </ForecastItem>
             <ForecastItem>
               Temp: <strong>{weatherTemps.dayThreeStart}</strong>
@@ -97,7 +101,7 @@ function Forecast() {
               Title: <strong>Afternoon</strong>
             </ForecastItem>
             <ForecastItem>
-              Desc: <strong>{forecastDescriptions.dayThree}</strong>
+              Desc: <strong>{forecastDescriptions.dayThreeEnd}</strong>
             </ForecastItem>
             <ForecastItem>
               Temp: <strong>{weatherTemps.dayThreeEnd}</strong>
@@ -112,7 +116,7 @@ function Forecast() {
               Title: <strong>Morning</strong>
             </ForecastItem>
             <ForecastItem>
-              Desc: <strong>{forecastDescriptions.dayFour}</strong>
+              Desc: <strong>{forecastDescriptions.dayFourStart}</strong>
             </ForecastItem>
             <ForecastItem>
               Temp: <strong>{weatherTemps.dayFourStart}</strong>
@@ -125,7 +129,7 @@ function Forecast() {
               Title: <strong>Afternoon</strong>
             </ForecastItem>
             <ForecastItem>
-              Desc: <strong>{forecastDescriptions.dayFour}</strong>
+              Desc: <strong>{forecastDescriptions.dayFourEnd}</strong>
             </ForecastItem>
             <ForecastItem>
               Temp: <strong>{weatherTemps.dayFourEnd}</strong>
@@ -140,7 +144,7 @@ function Forecast() {
               Title: <strong>Morning</strong>
             </ForecastItem>
             <ForecastItem>
-              Desc: <strong>{forecastDescriptions.dayFive}</strong>
+              Desc: <strong>{forecastDescriptions.dayFiveStart}</strong>
             </ForecastItem>
             <ForecastItem>
               Temp: <strong>{weatherTemps.dayFiveStart}</strong>
@@ -153,7 +157,7 @@ function Forecast() {
               Title: <strong>Afternoon</strong>
             </ForecastItem>
             <ForecastItem>
-              Desc: <strong>{forecastDescriptions.dayFive}</strong>
+              Desc: <strong>{forecastDescriptions.dayFiveEnd}</strong>
             </ForecastItem>
             <ForecastItem>
               Temp: <strong>{weatherTemps.dayFiveEnd}</strong>

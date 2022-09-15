@@ -1,5 +1,6 @@
 import React from "react";
 import { useSearchWeatherContext } from "../../Providers/SearchWeather";
+import { useForecastContext } from "../../Providers/Forecast";
 import { TbTemperatureFahrenheit } from "react-icons/tb";
 import Styled from "../../Global/Style";
 import Forecast from "./Forecast";
